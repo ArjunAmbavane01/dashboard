@@ -29,18 +29,16 @@ const Navbar = () => {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                     <Link href='/profile'>
-                    Profile
+                        Profile
                     </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                     <Link href='/auth'>
-                    Logout
+                        Logout
                     </Link>
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
-
-
     </div>);
 }
 
