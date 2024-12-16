@@ -9,6 +9,14 @@ interface PostTableProps {
 }
 
 const PostsTable = ({limit,title}:PostTableProps) => {
+    // Sort posts in dec order based on date
+
+    const sortedPosts:Post[] = [...posts].sort((a,b)=> new Date(b.date).getTime() - new Date(a.date).getTime())
+
+    // Filter Posts to limit
+
+    const filteredPosts = limit ? sortedPosts.slice(0,limit) : sortedPosts;
+
     return ( <div className="p-3 mt-10">
         <h3 className="text-2xl mb-4 font-semibold">
             {title ? title : 'Posts'}
@@ -24,13 +32,15 @@ const PostsTable = ({limit,title}:PostTableProps) => {
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {posts.map((post)=> (
+                {filteredPosts.map((post)=> (
                     <TableRow key={post.id} >
                         <TableCell>{post.title}</TableCell>
                         <TableCell className="hidden md:table-cell">{post.author}</TableCell>
-                        <TableCell className="hidden md:table-cell right">{post.date}</TableCell>
+                        <TableCell className="hidden md:table-cell text-right">{post.date}</TableCell>
                         <TableCell>
-                            <Link href={`/posts/edit/${post.id}`}></Link>
+                            <Link href={`/posts/edit/${post.id}`}>
+                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-xs">Edit</button>
+                            </Link>
                         </TableCell>
                     </TableRow>
                 ))}
